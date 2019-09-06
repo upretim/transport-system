@@ -1,26 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import './App.css';
+import BookingComponent from './components/BookingComponent/bookingComponent';
+import BookingReport from './components/BookingReport/BookingReport';
+import Login from './containers/login/Login';
+import AdminLayout from './containers/admin/admin';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Router>
+        <Route exact path="/" component={Login} />
+        <Route exact path="/login" component={Login} />
+        <Route path="/user" component={BookingComponent} />
+        <Route path="/admin" component={AdminLayout} />
+      </Router>   
     </div>
   );
 }
 
 export default App;
+
+//<BookingReport numberOfSeats="45" bookedSeats= "30" availableSeats="15"/><BookingComponent/>
