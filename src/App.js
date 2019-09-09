@@ -1,8 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import './App.css';
-import BookingComponent from './components/BookingComponent/bookingComponent';
-import BookingReport from './components/BookingReport/BookingReport';
+import Userlayout from './containers/user/user'
 import Login from './containers/login/Login';
 import AdminLayout from './containers/admin/admin';
 
@@ -12,7 +11,7 @@ function App() {
       <Router>
         <Route exact path="/" component={Login} />
         <Route exact path="/login" component={Login} />
-        <Route path="/user" component={BookingComponent} />
+        <Route path="/user" component={Userlayout} />
         <Route path="/admin" component={AdminLayout} />
       </Router>   
     </div>
@@ -21,4 +20,3 @@ function App() {
 
 export default App;
 
-//<BookingReport numberOfSeats="45" bookedSeats= "30" availableSeats="15"/><BookingComponent/>

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import BookingReport from './../../components/BookingReport/BookingReport';
-import Loader from 'react-loader-spinner'
+import Loader from 'react-loader-spinner';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 // Spinner doc https://www.npmjs.com/package/react-loader-spinner

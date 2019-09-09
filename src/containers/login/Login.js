@@ -46,7 +46,7 @@ export default class Login extends Component {
           }       
         })
         .catch(error=>{
-
+          console.log('Error occured while tryingto login', error)
         })
   }
 
