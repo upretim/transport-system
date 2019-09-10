@@ -48,18 +48,23 @@ bookTicketHander = (data, event)=>{
     console.log('booking data', data)
     this.ticketId = this.create_UUID();
     const ticket = {
-        _id: this.ticketId
+        _id : this.ticketId,
+        pessangerName : data.name,
+        timeSlot : data.selectedSlot
     }
-    axios.post('http://localhost:3001/save-ticket', ticket)
+    axios.post('http://localhost:3001/ticket-data', ticket)
     .then((response)=>{
-        console.log(response);
+        this.setState({
+            ticketId: this.ticketId
+        })
     })
     .catch(error=>{
+        this.setState({
+            ticketId: "Error"
+        })
         console.log('Error while saving ticket', error);
     })
-    this.setState({
-        ticketId: this.ticketId
-    })
+    
 }
     render(){
         const {  available, filled, total, ticketId} = this.state;
