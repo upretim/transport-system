@@ -62,7 +62,7 @@ bookTicketHander = (data, event)=>{
         this.setState({
             ticketId: "Error"
         })
-        console.log('Error while saving ticket', error);
+        console.log('Error while saving ticket', error.response.data);
     })
     
 }

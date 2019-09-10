@@ -5,39 +5,41 @@ import BookingIdComponent from './BookingIdComponent';
 class  BookingComponent extends Component {
     constructor(props){
       super(props)
+      this.state = {
+          name: "",
+          selectedSlot: ""
+      }
+      this.slotSelected.bind(this);
     }
      
-    ticketDetails = {
-        name: "",
-        selectedSlot: ""
-    }
-  
    
     nameEntered = (event)=>{
         event.preventDefault();
-        this.ticketDetails['name'] = event.target.value;
-        console.log('handle selected ', event.target.value)
+        this.setState({
+            name:  event.target.value
+        })
     }
 
     slotSelected = (event)=>{
         event.preventDefault();
-        console.log('handle selected ', event.target.value);
-        this.ticketDetails['selectedSlot'] = event.target.value;
-        console.log('Selected ticket ', this.ticketDetails);
-    }
-
-    enableBooking = ()=>{
-        if(this.ticketDetails['selectedSlot']=="" || this.ticketDetails['name']==""){
-            console.log('this is enableBooking', true);
-            return false;  
-        }    
-        else{
-            console.log('this is enableBooking', false);
-        return false;
-        }     
+        this.setState({
+            selectedSlot: event.target.value
+        });
     }
 
     render(){
+
+        const ticketDetails = {...this.state}
+
+       const disableBooking = ()=>{
+            if(this.state.name== "" || this.state.selectedSlot== ""){
+                return true;  
+            }    
+            else{
+                console.log('this is enableBooking', false);
+                return false;
+            }     
+        }
        let view = null;
         if(this.props.bookingId){
             view = <BookingIdComponent bookingId = {this.props.bookingId}/>
@@ -47,10 +49,13 @@ class  BookingComponent extends Component {
                 <h6>Please select time slot for your commute</h6>
                  <div className="form-group row"> 
                 <div><label className="ml-2">Please enter your name:</label>
-                <input className="ml-2" type="text" onChange={this.nameEntered}/>
+                <input className="ml-2" type="text"
+                 onChange={this.nameEntered}
+                  value={this.state.name}
+                  placeholder="Name"/>
                 </div>            
-                <select className="form-control form-control-sm col-sm-2 ml-2" onClick={this.slotSelected} >
-                    <option>Please select slot</option>
+                <select className="form-control form-control-sm col-sm-2 ml-2" onChange={this.slotSelected} value={this.state.selectedSlot}>
+                    <option value="">Please select slot</option>
                     <option value="7:00 AM">7:00 AM</option>
                     <option value="8:00 AM">8:00 AM</option>
                     <option value="9:00 AM">9:00 AM</option>
@@ -63,7 +68,7 @@ class  BookingComponent extends Component {
                     <option value="4:00 PM">4:00 PM</option>
                     <option value="5:00 PM">5:00 PM</option>
                 </select>
-                <button className="btn btn-success btn-sm" onClick={this.props.bookTicket.bind(this, this.ticketDetails)}  disabled= {this.enableBooking()}>Book Ticket</button>
+                <button className="btn btn-success btn-sm" onClick={this.props.bookTicket.bind(this, ticketDetails)}  disabled= {disableBooking()}>Book Ticket</button>
             </div>
               {view}
             </form>  
