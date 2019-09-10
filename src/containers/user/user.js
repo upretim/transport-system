@@ -32,9 +32,7 @@ componentDidMount(){
             error: error
         })
     })
-
 }
-
   
 create_UUID=()=>{
     var dt = new Date().getTime();
@@ -45,8 +43,9 @@ create_UUID=()=>{
     });
     return uuid;
 }
-bookTicketHander = (event)=>{
+bookTicketHander = (data, event)=>{
     event.preventDefault();
+    console.log('booking data', data)
     this.ticketId = this.create_UUID();
     const ticket = {
         _id: this.ticketId
@@ -64,7 +63,6 @@ bookTicketHander = (event)=>{
 }
     render(){
         const {  available, filled, total, ticketId} = this.state;
-        console.log('Ticket booked', ticketId);
         let view= (<BookingReport 
             numberOfSeats={total}
             bookedSeats={filled}

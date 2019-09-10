@@ -1,7 +1,6 @@
 import React from 'react';
 
 const BookingId = (props)=>{
-    //console.log('this is your booking id ' ,props.BookingId);
   let view = null;
   if (props.bookingId){
       view =         <div className="alert alert-success alert-dismissible">

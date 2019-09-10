@@ -3,6 +3,7 @@ import axios from 'axios';
 import BookingReport from './../../components/BookingReport/BookingReport';
 import Loader from 'react-loader-spinner';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import PessangerDetails from './../../components/PessagerList/PessangerList';
 
 // Spinner doc https://www.npmjs.com/package/react-loader-spinner
 
@@ -12,7 +13,8 @@ class adminLayout extends Component {
             this.state = {
                 available:0,
                 filled: 0,
-                total: 0
+                total: 0,
+                ticketDetails: []
             }
     }
     componentDidMount(){
@@ -32,6 +34,17 @@ class adminLayout extends Component {
             })
         })
 
+        axios.get('http://localhost:3001/ticket-data')
+        .then((response => {
+            console.log(response.data.ticketData);
+            this.setState({
+                ticketDetails: response.data.ticketData
+            })
+        }))
+        .catch(error=>{
+            console.log(error.message);
+        })
+
     }
   render(){
     const {  available, filled, total} = this.state;
@@ -49,7 +62,10 @@ class adminLayout extends Component {
 
        }
       return(
-            view
+            <>
+            {view}
+            <PessangerDetails ticketDetails = {this.state.ticketDetails}/>
+            </>
       )
   }
 }
